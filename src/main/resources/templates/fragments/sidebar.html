@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<aside class="sidebar" th:fragment="sidebar">
+    <div class="sidebar__brand">
+        <span class="sidebar__logo">✦</span>
+        <span class="sidebar__title">GameLib.</span>
+    </div>
+
+    <nav class="sidebar__nav">
+        <a th:href="@{/}" class="sidebar__link" th:classappend="${activePage == 'home'} ? ' is-active'">
+            <span class="sidebar__icon">🏠</span>
+            <span>Home</span>
+        </a>
+
+        <a th:href="@{/my-games}" class="sidebar__link" th:classappend="${activePage == 'my-games'} ? ' is-active'">
+            <span class="sidebar__icon">🎮</span>
+            <span>My Games</span>
+        </a>
+
+        <a th:href="@{/games}" class="sidebar__link" th:classappend="${activePage == 'games'} ? ' is-active'">
+            <span class="sidebar__icon">🔍</span>
+            <span>Discover Games</span>
+        </a>
+
+        <a th:href="@{/settings}" class="sidebar__link" th:classappend="${activePage == 'settings'} ? ' is-active'">
+            <span class="sidebar__icon">⚙️</span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <div class="sidebar__footer">
+        <div class="theme-toggle">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-label">Dark/Light</span>
+
+            <label class="switch">
+                <input type="checkbox" id="themeToggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <a href="#" class="sidebar__link">
+            <span class="sidebar__icon">❓</span>
+            <span>Help</span>
+        </a>
+    </div>
+</aside>
