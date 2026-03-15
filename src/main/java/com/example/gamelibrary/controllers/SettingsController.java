@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
-    @GetMapping("/")
-    public String home(Model model){
+public class SettingsController {
+    @GetMapping("/settings")
+    public String settings(Model model){
 
-        model.addAttribute("content", "pages/home");
+        model.addAttribute("content", "pages/settings");
 
         return "layout/main";
     }

@@ -5,11 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
-    @GetMapping("/")
-    public String home(Model model){
+public class AllGamesController {
 
-        model.addAttribute("content", "pages/home");
+    @GetMapping("/games")
+    public String games(Model model){
+
+        model.addAttribute("content", "pages/games");
 
         return "layout/main";
     }
