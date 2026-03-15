@@ -1,0 +1,220 @@
+/* HERO SECTION */
+.game-details{
+    margin-bottom:60px;
+}
+
+.game-hero{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:40px;
+    margin-bottom:60px;
+}
+
+.game-cover img{
+    width:249px;
+
+    border-radius:12px;
+    border:1px solid var(--color-border);
+}
+
+
+/* GAME META */
+.game-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.game-title{
+    font-size:28px;
+    font-weight:800;
+}
+
+.favorite-btn{
+    background:none;
+    border:none;
+    font-size:22px;
+    color:var(--color-text-muted);
+    cursor:pointer;
+    transition:0.15s;
+}
+
+.favorite-btn:hover{
+    color:var(--color-accent);
+}
+
+
+/* GAME INFO */
+.game-info{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:14px;
+    color:var(--color-text-secondary);
+}
+
+.game-price{
+    font-size:18px;
+    font-weight:700;
+    color:var(--color-accent);
+}
+
+.genre-tag{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:6px;
+    background:var(--color-bg-tertiary);
+    font-size:12px;
+    margin-right:6px;
+}
+
+
+/* DESCRIPTION */
+.game-description{
+    margin-top:10px;
+    line-height:1.6;
+    max-width:700px;
+}
+
+
+
+/* REVIEWS SECTION */
+.reviews-section{
+    margin-top:40px;
+}
+
+.reviews-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.reviews-header h2{
+    font-size:22px;
+}
+
+.rating-average{
+    font-weight:700;
+    color:var(--color-accent);
+}
+
+
+/* ADD REVIEW BUTTON */
+.add-review-toggle{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.add-review-text{
+    color:var(--color-text-secondary);
+}
+
+
+/* REVIEW FORM */
+.review-form-container{
+    display:none;
+    flex-direction:column;
+    gap:16px;
+    margin-bottom:30px;
+    max-width:520px;
+}
+
+.review-form-container.active{
+    display:flex;
+}
+
+.review-rating-select{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.review-rating-select input{
+    background:var(--color-bg-input);
+    border:1px solid var(--color-border);
+    border-radius:8px;
+    padding:10px 12px;
+    color:var(--color-text-primary);
+}
+
+.review-form-container textarea{
+    background:var(--color-bg-input);
+    border:1px solid var(--color-border);
+    border-radius:8px;
+    padding:12px;
+    color:var(--color-text-primary);
+    min-height:100px;
+}
+
+
+
+/* STAR RATING */
+.star-rating{
+    display:flex;
+    gap:6px;
+}
+
+.star-rating span{
+    font-size:22px;
+    cursor:pointer;
+    color:var(--color-text-muted);
+    transition:0.15s;
+}
+
+.star-rating span.active{
+    color:var(--color-accent);
+}
+
+
+
+/* REVIEW LIST */
+.reviews-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+
+
+/* REVIEW CARD */
+.review-card{
+    background:var(--color-bg-card);
+    border:1px solid var(--color-border);
+    border-radius:10px;
+    padding:18px;
+}
+
+.review-rating{
+    font-size:15px;
+    margin-bottom:6px;
+}
+
+.review-text{
+    margin-bottom:8px;
+    line-height:1.5;
+}
+
+.review-meta{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--color-text-muted);
+}
+
+
+/* RESPONSIVE */
+@media (max-width:900px){
+
+    .game-hero{
+        grid-template-columns:1fr;
+    }
+
+    .game-cover img{
+        width:220px;
+    }
+
+}

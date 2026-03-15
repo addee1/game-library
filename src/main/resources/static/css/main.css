@@ -1,0 +1,21 @@
+@import url('./base/reset.css');
+@import url('./base/variables.css');
+
+@import url('./layout/app-shell.css');
+@import url('./layout/sidebar.css');
+@import url('./layout/header.css');
+
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/sections.css');
+@import url('./components/tables.css');
+@import "components/modal.css";
+
+@import url('./pages/home.css');
+@import url('./pages/games.css');
+@import url('./pages/my-games.css');
+@import url('./pages/settings.css');
+@import url('./pages/game-details.css');
+
+@import url('./themes/dark.css');
+@import url('./themes/light.css');

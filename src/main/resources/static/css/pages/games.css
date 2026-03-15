@@ -1,0 +1,217 @@
+/* PAGE LAYOUT */
+.games-page{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+/* TOOLBAR (SEARCH + FILTERS) */
+.games-toolbar{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+/* SEARCH BAR */
+.games-search{
+
+    width: 340px;
+
+    padding: 12px 16px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--color-border);
+
+    background: var(--color-bg-input);
+
+    color: var(--color-text-primary);
+
+    outline: none;
+
+}
+
+.games-search::placeholder{
+
+    color: var(--color-text-muted);
+
+}
+
+
+
+/* FILTER BUTTONS */
+.games-filters{
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+.filter-btn{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--color-border);
+
+    background: var(--color-bg-input);
+
+    color: var(--color-text-primary);
+
+    cursor: pointer;
+
+    transition: 0.15s;
+
+}
+
+.filter-btn:hover{
+
+    background: var(--color-bg-card);
+
+}
+
+
+/* GAMES GRID */
+.games-grid{
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(190px,1fr));
+
+    gap: 22px;
+
+}
+
+
+
+/* GAME CARD */
+.game-card{
+
+    background: var(--color-bg-card);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    border: 1px solid var(--color-border);
+
+}
+
+.game-card:hover{
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+
+}
+
+
+/* GAME IMAGE */
+.game-card img{
+
+    width: 100%;
+
+    height: 240px;
+
+    object-fit: cover;
+
+}
+
+
+
+/* GAME INFO */
+.game-info{
+
+    padding:12px 14px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.game-info h4{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.game-info span{
+
+    font-size:13px;
+
+    color:var(--color-text-muted);
+
+}
+
+
+/* PAGINATION */
+.pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:30px;
+
+}
+
+.page-btn{
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    border:1px solid var(--color-border);
+
+    background:var(--color-bg-input);
+
+    color:var(--color-text-primary);
+
+    cursor:pointer;
+
+    transition:0.15s;
+
+}
+
+.page-btn:hover{
+
+    background:var(--color-bg-card);
+
+}
+
+.page-btn.active{
+
+    background:#22c55e;
+
+    border-color:#22c55e;
+
+    color:#fff;
+
+}
