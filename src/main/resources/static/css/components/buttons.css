@@ -1,0 +1,108 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 12px 22px;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition-fast);
+}
+
+.btn--primary {
+    background: var(--color-accent);
+    color: #000;
+}
+
+.btn--primary:hover {
+    background: var(--color-accent-hover);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--color-text-primary);
+    border-color: var(--color-border-light);
+}
+
+.btn--ghost:hover {
+    background: var(--color-bg-hover);
+}
+
+.btn--full {
+    width: 100%;
+}
+
+.btn--small {
+    padding: 8px 14px;
+    font-size: var(--text-xs);
+}
+
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--color-danger);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+
+
+/* Toggle switch */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    color: var(--color-text-secondary);
+}
+
+.theme-icon {
+    font-size: 18px;
+}
+
+.theme-label {
+    flex: 1;
+    font-size: 14px;
+}
+
+
+.switch {
+    position: relative;
+    width: 42px;
+    height: 22px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: #333;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+input:checked + .slider {
+    background: var(--color-accent);
+}
+
+input:checked + .slider::before {
+    transform: translateX(20px);
+}
