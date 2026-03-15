@@ -13,11 +13,18 @@ public class GameMapper {
 
         dto.setId(game.getId());
         dto.setTitle(game.getTitle());
-        dto.setGenre(game.getGenre());
+        dto.setGenres(game.getGenres());
         dto.setPlatform(game.getPlatform());
         dto.setDeveloper(game.getDeveloper());
         dto.setReleaseDate(game.getReleaseDate());
+        dto.setPrice(game.getPrice());
         dto.setImageUrl(game.getImageUrl());
+        dto.setDescription(game.getDescription());
+
+        dto.setFeatured(game.isFeatured());
+        dto.setFavorite(game.isFavorite());
+
+        dto.setCreatedAt(game.getCreatedAt());
 
         return dto;
     }
@@ -29,12 +36,15 @@ public class GameMapper {
         Game game = new Game();
 
         game.setTitle(dto.getTitle());
-        game.setGenre(dto.getGenre());
+        game.setGenres(dto.getGenres());
         game.setPlatform(dto.getPlatform());
         game.setDeveloper(dto.getDeveloper());
         game.setReleaseDate(dto.getReleaseDate());
+        game.setPrice(dto.getPrice());
         game.setImageUrl(dto.getImageUrl());
         game.setDescription(dto.getDescription());
+
+        game.setFeatured(dto.getFeatured());
 
         return game;
     }
@@ -43,11 +53,13 @@ public class GameMapper {
     public static void updateEntity(Game game, UpdateGameDTO dto) {
 
         game.setTitle(dto.getTitle());
-        game.setGenre(dto.getGenre());
+        game.setGenres(dto.getGenres());
         game.setPlatform(dto.getPlatform());
         game.setDeveloper(dto.getDeveloper());
         game.setReleaseDate(dto.getReleaseDate());
+        game.setPrice(dto.getPrice());
         game.setImageUrl(dto.getImageUrl());
         game.setDescription(dto.getDescription());
+        game.setFeatured(dto.getFeatured());
     }
 }

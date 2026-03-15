@@ -1,0 +1,152 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="content">
+
+    <section class="game-details">
+
+        <!-- HERO -->
+        <div class="game-hero">
+
+            <div class="game-cover">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/coaczd.jpg">
+            </div>
+
+            <div class="game-meta">
+
+                <div class="game-header">
+
+                    <h1 class="game-title">
+                        Cyberpunk 2077
+                    </h1>
+
+                    <button class="favorite-btn">
+                        ♥
+                    </button>
+
+                </div>
+
+                <div class="game-info">
+
+                    <p><strong>Developer:</strong> CD Projekt Red</p>
+                    <p><strong>Release Date:</strong> 2020</p>
+                    <p><strong>Platform:</strong> PC / PS5 / Xbox</p>
+
+                    <p><strong>Genres:</strong>
+                        <span class="genre-tag">RPG</span>
+                        <span class="genre-tag">Action</span>
+                    </p>
+
+                    <p class="game-price">$59</p>
+
+                </div>
+
+                <p class="game-description">
+                    Cyberpunk 2077 is an open-world action-adventure story set in Night City,
+                    a megalopolis obsessed with power, glamour and body modification.
+                    Play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="reviews-section">
+
+        <div class="reviews-header">
+
+            <h2>User Reviews</h2>
+
+            <div class="rating-average">
+                ★★★★★ 4.2 / 5
+            </div>
+
+        </div>
+
+        <!-- ADD REVIEW TOGGLE -->
+
+        <div class="add-review-toggle">
+
+            <p class="add-review-text">
+                Want to add a review?
+            </p>
+
+            <button class="btn btn--ghost" id="toggleReviewForm">
+                Add Review
+            </button>
+
+        </div>
+
+
+        <!-- REVIEW FORM -->
+
+        <div class="review-form-container" id="reviewForm">
+
+            <div class="review-rating-select">
+
+                <input type="text" placeholder="Your name">
+
+                <div class="star-rating" id="starRating">
+
+                    <span data-value="1">☆</span>
+                    <span data-value="2">☆</span>
+                    <span data-value="3">☆</span>
+                    <span data-value="4">☆</span>
+                    <span data-value="5">☆</span>
+
+                </div>
+
+            </div>
+
+            <textarea placeholder="Comment (optional)"></textarea>
+
+            <button class="btn btn--primary">
+                Submit Review
+            </button>
+
+        </div>
+
+
+        <!-- REVIEW LIST -->
+
+        <div class="reviews-list">
+
+            <div class="review-card">
+
+                <div class="review-rating">★★★★★</div>
+
+                <p class="review-text">
+                    "Amazing world and storytelling!"
+                </p>
+
+                <div class="review-meta">
+                    <span>PlayerOne</span>
+                    <span>12 Mar 2026</span>
+                </div>
+
+            </div>
+
+
+            <div class="review-card">
+
+                <div class="review-rating">★★★★☆</div>
+
+                <p class="review-text">
+                    "Great game but still some bugs."
+                </p>
+
+                <div class="review-meta">
+                    <span>GamerGuy</span>
+                    <span>10 Mar 2026</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+</html>

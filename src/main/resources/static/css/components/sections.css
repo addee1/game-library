@@ -1,0 +1,40 @@
+.section {
+    margin-bottom: var(--space-2xl);
+}
+
+.section__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.section__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+}
+
+.section__title--muted {
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.section__subtitle {
+    color: var(--color-text-muted);
+}
+
+.section__link {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.section__actions {
+    margin-bottom: var(--space-xl);
+}
+
+.actions-row {
+    display: flex;
+    gap: var(--space-md);
+}

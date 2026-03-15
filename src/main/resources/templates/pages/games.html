@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="content">
+    <section class="games-page">
+
+        <div class="games-toolbar">
+
+            <input
+                    type="text"
+                    class="games-search"
+                    placeholder="Search games..."
+            >
+
+            <div class="games-filters">
+
+                <button class="filter-btn">
+                    Platform ▾
+                </button>
+
+                <button class="filter-btn">
+                    Genre ▾
+                </button>
+
+                <button class="filter-btn">
+                    Price ▾
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="games-grid">
+
+            <div class="game-card">
+                <img src="/images/game1.jpg">
+                <div class="game-info">
+                    <h4>Pixel Quest</h4>
+                    <span>$29</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="pagination">
+
+            <button class="page-btn">‹</button>
+
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+
+            <button class="page-btn">›</button>
+
+        </div>
+
+    </section>
+</div>
