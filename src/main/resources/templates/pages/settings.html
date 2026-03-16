@@ -23,20 +23,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Counter Strike 2</td>
-                        <td>2022</td>
-                        <td>PC</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td class="table-actions">
-                            <button class="btn btn--ghost btn--small">Edit</button>
-                            <button class="btn-delete openDeleteModal">
+
+                <tr th:each="game : ${games}">
+
+                    <td th:text="${game.id}"></td>
+
+                    <td th:text="${game.title}"></td>
+
+                    <td th:text="${game.releaseDate != null ? #temporals.format(game.releaseDate, 'yyyy') : '-'}"></td>
+
+                    <td th:text="${game.platform}"></td>
+
+                    <td th:text="${game.developer}"></td>
+
+                    <td th:text="${game.price != null ? '$' + game.price : 'Free'}"></td>
+
+                    <td class="table-actions">
+
+                        <button class="btn btn--ghost btn--small">
+                            Edit
+                        </button>
+
+                        <form th:action="@{/games/{id}/delete(id=${game.id})}" method="post" style="display:inline">
+                            <button type="button"
+                                    class="btn-delete openDeleteModal"
+                                    th:data-id="${game.id}"
+                                    th:data-title="${game.title}">
                                 ✕
                             </button>
-                        </td>
-                    </tr>
+                        </form>
+
+                    </td>
+
+                </tr>
+
                 </tbody>
             </table>
         </div>
@@ -44,7 +64,9 @@
     </section>
 
     <!-- ADD GAME MODAL -->
-    <div class="modal-overlay" id="addGameModal">
+    <div class="modal-overlay"
+         id="addGameModal"
+         th:classappend="${openAddModal} ? ' active'">
 
         <div class="modal">
 
@@ -53,113 +75,186 @@
                 <button class="modal__close" id="closeAddGame">✕</button>
             </div>
 
-            <form class="modal__form" th:action="@{/games}" method="post">
+            <form class="modal__form"
+                  th:action="@{/games}"
+                  th:object="${createGameDTO}"
+                  method="post">
 
+                <!-- TITLE -->
                 <div class="form-group">
                     <label>Title</label>
-                    <input type="text" name="title" required>
+
+                    <input type="text" th:field="*{title}">
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('title')}"
+                       th:errors="*{title}">
+                    </p>
                 </div>
 
+
+                <!-- GENRES -->
                 <div class="form-group">
                     <label>Genres</label>
 
                     <div class="genre-dropdown">
-                        <button type="button" class="genre-dropdown__toggle" id="genreDropdownToggle">
+                        <button type="button"
+                                class="genre-dropdown__toggle"
+                                id="genreDropdownToggle">
                             Select genres
                         </button>
 
                         <div class="genre-dropdown__menu" id="genreDropdownMenu">
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Action">
+                                <input type="checkbox" th:field="*{genres}" value="Action">
                                 <span>Action</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Adventure">
+                                <input type="checkbox" th:field="*{genres}" value="Adventure">
                                 <span>Adventure</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="FPS">
+                                <input type="checkbox" th:field="*{genres}" value="FPS">
                                 <span>FPS</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="RPG">
+                                <input type="checkbox" th:field="*{genres}" value="RPG">
                                 <span>RPG</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Strategy">
+                                <input type="checkbox" th:field="*{genres}" value="Strategy">
                                 <span>Strategy</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Racing">
+                                <input type="checkbox" th:field="*{genres}" value="Racing">
                                 <span>Racing</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Simulation">
+                                <input type="checkbox" th:field="*{genres}" value="Simulation">
                                 <span>Simulation</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Sports">
+                                <input type="checkbox" th:field="*{genres}" value="Sports">
                                 <span>Sports</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Horror">
+                                <input type="checkbox" th:field="*{genres}" value="Horror">
                                 <span>Horror</span>
                             </label>
 
                             <label class="genre-option">
-                                <input type="checkbox" name="genres" value="Indie">
+                                <input type="checkbox" th:field="*{genres}" value="Indie">
                                 <span>Indie</span>
                             </label>
 
                         </div>
                     </div>
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('genres')}"
+                       th:errors="*{genres}">
+                    </p>
+
                 </div>
 
+
+                <!-- PLATFORM -->
                 <div class="form-group">
                     <label>Platform</label>
-                    <input type="text" name="platform">
+
+                    <input type="text" th:field="*{platform}">
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('platform')}"
+                       th:errors="*{platform}">
+                    </p>
                 </div>
 
+
+                <!-- DEVELOPER -->
                 <div class="form-group">
                     <label>Developer</label>
-                    <input type="text" name="developer">
+
+                    <input type="text" th:field="*{developer}">
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('developer')}"
+                       th:errors="*{developer}">
+                    </p>
                 </div>
 
+
+                <!-- RELEASE DATE -->
                 <div class="form-group">
                     <label>Release Date</label>
-                    <input type="date" name="releaseDate">
+
+                    <input type="date" th:field="*{releaseDate}">
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('releaseDate')}"
+                       th:errors="*{releaseDate}">
+                    </p>
                 </div>
 
+
+                <!-- PRICE -->
                 <div class="form-group">
                     <label>Price</label>
-                    <input type="number" step="0.01" name="price">
+
+                    <input type="number"
+                           step="0.01"
+                           th:field="*{price}">
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('price')}"
+                       th:errors="*{price}">
+                    </p>
                 </div>
 
+
+                <!-- IMAGE -->
                 <div class="form-group">
                     <label>Image URL</label>
-                    <input type="text" name="imageUrl">
+
+                    <input type="text" th:field="*{imageUrl}">
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('imageUrl')}"
+                       th:errors="*{imageUrl}">
+                    </p>
                 </div>
 
+
+                <!-- DESCRIPTION -->
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea name="description"></textarea>
+
+                    <textarea th:field="*{description}"></textarea>
+
+                    <p class="form-error"
+                       th:if="${#fields.hasErrors('description')}"
+                       th:errors="*{description}">
+                    </p>
                 </div>
 
+
+                <!-- FEATURED -->
                 <div class="form-group form-checkbox">
                     <label>
-                        <input type="checkbox" name="featured">
+                        <input type="checkbox" th:field="*{featured}">
                         Featured Game
                     </label>
                 </div>
+
 
                 <button type="submit" class="btn btn-primary">
                     Save Game
@@ -178,21 +273,23 @@
 
             <h3>Delete Game</h3>
 
-            <p id="deleteText">
-                Are you sure you want to delete this game?
-            </p>
+            <p id="deleteText"></p>
 
-            <div class="modal-actions">
+            <form id="deleteForm" method="post">
 
-                <button class="btn btn--danger">
-                    Delete
-                </button>
+                <div class="modal-actions">
 
-                <button class="btn btn--ghost" id="cancelDelete">
-                    Cancel
-                </button>
+                    <button type="submit" class="btn btn--danger">
+                        Delete
+                    </button>
 
-            </div>
+                    <button type="button" class="btn btn--ghost" id="cancelDelete">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
 
         </div>
 
