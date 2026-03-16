@@ -3,9 +3,12 @@ const modal = document.getElementById("addGameModal");
 const closeBtn = document.getElementById("closeAddGame");
 const genreToggle = document.getElementById("genreDropdownToggle");
 const genreMenu = document.getElementById("genreDropdownMenu");
+
 const deleteButtons = document.querySelectorAll(".openDeleteModal");
 const deleteModal = document.getElementById("deleteModal");
 const cancelDelete = document.getElementById("cancelDelete");
+const deleteText = document.getElementById("deleteText");
+const deleteForm = document.getElementById("deleteForm");
 
 
 if(addBtn){
@@ -58,9 +61,20 @@ if (genreToggle && genreMenu) {
 
 }
 
+// DELETE MODAL
 deleteButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        const gameId = button.dataset.id;
+        const gameTitle = button.dataset.title;
+
+        deleteText.textContent =
+            `Are you sure you want to delete "${gameTitle}"?`;
+
+        deleteForm.action = `/games/${gameId}/delete`;
 
         deleteModal.classList.add("active");
 
@@ -68,12 +82,6 @@ deleteButtons.forEach(button => {
 
 });
 
-if(cancelDelete){
-
-    cancelDelete.addEventListener("click", () => {
-
-        deleteModal.classList.remove("active");
-
-    });
-
-}
+cancelDelete.addEventListener("click", () => {
+    deleteModal.classList.remove("active");
+});
