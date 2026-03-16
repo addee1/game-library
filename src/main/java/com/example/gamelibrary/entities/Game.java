@@ -19,6 +19,7 @@ public class Game {
     private LocalDate releaseDate;
     private BigDecimal price;
     private String imageUrl;
+    @Lob
     private String description;
     private boolean featured;
     private boolean favorite;
