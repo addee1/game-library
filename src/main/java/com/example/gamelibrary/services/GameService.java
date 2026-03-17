@@ -75,10 +75,30 @@ public class GameService {
                 .toList();
     }
 
-    public List<GameDTO> getRecentlyAdded(){
 
-        return gameRepository.findTop6ByOrderByCreatedAtDesc()
+    // sort by createdAt desc.
+    public List<GameDTO> getAllSortedByNewest() {
+        return gameRepository.findAllByOrderByCreatedAtDesc()
                 .stream()
+                .map(GameMapper::toDTO)
+                .toList();
+    }
+
+
+    // get featured for home page
+    public List<GameDTO> getFeaturedForHome() {
+        return gameRepository.findByFeaturedTrue()
+                .stream()
+                .limit(6)
+                .map(GameMapper::toDTO)
+                .toList();
+    }
+
+    // get recent for home page
+    public List<GameDTO> getRecentForHome() {
+        return gameRepository.findAllByOrderByCreatedAtDesc()
+                .stream()
+                .limit(6)
                 .map(GameMapper::toDTO)
                 .toList();
     }
