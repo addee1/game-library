@@ -6,16 +6,18 @@
         <!-- HERO -->
         <div class="game-hero">
 
+            <!-- COVER -->
             <div class="game-cover">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/coaczd.jpg">
+                <img th:src="${game.imageUrl}" alt="Game cover">
             </div>
 
+            <!-- META -->
             <div class="game-meta">
 
                 <div class="game-header">
 
-                    <h1 class="game-title">
-                        Cyberpunk 2077
+                    <h1 class="game-title"
+                        th:text="${game.title}">
                     </h1>
 
                     <button class="favorite-btn">
@@ -26,23 +28,45 @@
 
                 <div class="game-info">
 
-                    <p><strong>Developer:</strong> CD Projekt Red</p>
-                    <p><strong>Release Date:</strong> 2020</p>
-                    <p><strong>Platform:</strong> PC / PS5 / Xbox</p>
-
-                    <p><strong>Genres:</strong>
-                        <span class="genre-tag">RPG</span>
-                        <span class="genre-tag">Action</span>
+                    <p>
+                        <strong>Developer:</strong>
+                        <span th:text="${game.developer}"></span>
                     </p>
 
-                    <p class="game-price">$59</p>
+                    <p>
+                        <strong>Release Date:</strong>
+                        <span th:text="${#temporals.format(game.releaseDate,'yyyy')}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Platform:</strong>
+                        <span th:text="${game.platform}"></span>
+                    </p>
+
+
+                    <!-- GENRES -->
+                    <p>
+                        <strong>Genres:</strong>
+
+                        <span class="genre-tag"
+                              th:each="genre : ${game.genres}"
+                              th:text="${genre}">
+                    </span>
+
+                    </p>
+
+
+                    <!-- PRICE -->
+                    <p class="game-price"
+                       th:text="${game.price != null ? '$' + game.price : 'Free'}">
+                    </p>
 
                 </div>
 
-                <p class="game-description">
-                    Cyberpunk 2077 is an open-world action-adventure story set in Night City,
-                    a megalopolis obsessed with power, glamour and body modification.
-                    Play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.
+
+                <!-- DESCRIPTION -->
+                <p class="game-description"
+                   th:text="${game.description}">
                 </p>
 
             </div>
@@ -50,6 +74,7 @@
         </div>
 
     </section>
+
 
 
     <section class="reviews-section">
@@ -64,7 +89,8 @@
 
         </div>
 
-        <!-- ADD REVIEW TOGGLE -->
+
+        <!-- ADD REVIEW BUTTON -->
 
         <div class="add-review-toggle">
 
@@ -108,7 +134,7 @@
         </div>
 
 
-        <!-- REVIEW LIST -->
+        <!-- REVIEW LIST (still placeholder for now) -->
 
         <div class="reviews-list">
 
@@ -126,7 +152,6 @@
                 </div>
 
             </div>
-
 
             <div class="review-card">
 
@@ -146,7 +171,6 @@
         </div>
 
     </section>
-
 
 </div>
 </html>

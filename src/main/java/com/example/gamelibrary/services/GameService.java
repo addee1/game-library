@@ -1,11 +1,13 @@
 package com.example.gamelibrary.services;
 
 import com.example.gamelibrary.dtos.CreateGameDTO;
+import com.example.gamelibrary.dtos.GameDTO;
 import com.example.gamelibrary.dtos.UpdateGameDTO;
 import com.example.gamelibrary.entities.Game;
 import com.example.gamelibrary.mappers.GameMapper;
 import com.example.gamelibrary.repositories.GameRepository;
 import org.springframework.stereotype.Service;
+import com.example.gamelibrary.exceptions.GameNotFoundException;
 
 import java.util.List;
 
@@ -18,33 +20,88 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public List<Game> getAllGames(){
-        return gameRepository.findAll();
+    public List<GameDTO> getAllGames(){
+
+        return gameRepository.findAll()
+                .stream()
+                .map(GameMapper::toDTO)
+                .toList();
     }
 
-    public Game createGame(CreateGameDTO dto){
+    public GameDTO getGameById(Long id){
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new GameNotFoundException(id));
+
+        return GameMapper.toDTO(game);
+    }
+
+    public void createGame(CreateGameDTO dto){
         Game game = GameMapper.toEntity(dto);
 
-        return gameRepository.save(game);
+        gameRepository.save(game);
+    }
+
+    public void updateGame(Long id, UpdateGameDTO dto) {
+
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new GameNotFoundException(id));
+
+        GameMapper.updateEntity(game, dto);
+        gameRepository.save(game);
+
     }
 
     public void deleteGame(Long id) {
 
-        Game game = getGameById(id);
-
-        gameRepository.delete(game);
+        if(!gameRepository.existsById(id)){
+            throw new GameNotFoundException(id);
+        }
+        gameRepository.deleteById(id);
     }
 
-    public Game getGameById(Long id){
-        return gameRepository.findById(id).orElseThrow(() -> new RuntimeException("Game not found"));
+    public List<GameDTO> getAllFeatured(){
+
+        return gameRepository.findByFeaturedTrue()
+                .stream()
+                .map(GameMapper::toDTO)
+                .toList();
+
     }
 
-    public Game updateGame(Long id, UpdateGameDTO dto) {
-
-        Game game = getGameById(id);
-
-        GameMapper.updateEntity(game, dto);
-
-        return gameRepository.save(game);
+    public List<GameDTO> getAllFavorites(){
+        return gameRepository.findByFavoriteTrue()
+                .stream()
+                .map(GameMapper::toDTO)
+                .toList();
     }
+
+
+    // sort by createdAt desc.
+    public List<GameDTO> getAllSortedByNewest() {
+        return gameRepository.findAllByOrderByCreatedAtDesc()
+                .stream()
+                .map(GameMapper::toDTO)
+                .toList();
+    }
+
+
+    // get featured for home page
+    public List<GameDTO> getFeaturedForHome() {
+        return gameRepository.findByFeaturedTrue()
+                .stream()
+                .limit(6)
+                .map(GameMapper::toDTO)
+                .toList();
+    }
+
+    // get recent for home page
+    public List<GameDTO> getRecentForHome() {
+        return gameRepository.findAllByOrderByCreatedAtDesc()
+                .stream()
+                .limit(6)
+                .map(GameMapper::toDTO)
+                .toList();
+    }
+
+
 }

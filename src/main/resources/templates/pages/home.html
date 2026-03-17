@@ -1,19 +1,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="content">
 
-    <!-- BEST SELLING -->
+    <!-- FEATURED -->
     <section class="section">
+
         <div class="section__head">
             <h1 class="section__title">Featured</h1>
-            <a href="/games" class="section__link">Explore All</a>
+            <a th:href="@{/games(filter='featured')}">Explore All</a>
         </div>
 
         <div class="card-grid card-grid--6">
-            <article class="game-card"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2e24?w=400&q=80" alt=""><div class="game-card__body"><h3>COD Modern Warfare 2</h3><p>Free</p></div></article>
-            <article class="game-card"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80" alt=""><div class="game-card__body"><h3>Assassin's Creed: Valhalla</h3><p>$109</p></div></article>
-            <article class="game-card"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80" alt=""><div class="game-card__body"><h3>Grand Theft Auto V</h3><p>$50</p></div></article>
-            <article class="game-card"><img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&q=80" alt=""><div class="game-card__body"><h3>Uncharted 4</h3><p>Free</p></div></article>
+
+            <a th:each="game : ${featuredGames}"
+               th:href="@{/games/{id}(id=${game.id})}"
+               class="game-card">
+
+                <img th:src="${game.imageUrl}" alt="">
+
+                <div class="game-card__body">
+                    <h3 th:text="${game.title}"></h3>
+                    <p th:text="${game.price != null ? '$' + game.price : 'Free'}"></p>
+                </div>
+
+            </a>
         </div>
+
     </section>
 
     <!-- BROWSE BY GENRES -->
@@ -21,30 +32,22 @@
 
         <div class="section__head">
             <h2 class="section__title">Browse By Categories</h2>
-            <a href="/games" class="section__link">Explore All</a>
+            <a th:href="@{/games(genre='Action')}">Explore All</a>
         </div>
 
         <div class="category-grid">
 
-            <article class="category-card">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=700&q=80">
-                <span>Action & Adventure</span>
-            </article>
+            <a th:each="genre : ${homeGenres}"
+               th:href="@{/games(genre=${genre})}"
+               class="category-card">
 
-            <article class="category-card">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=700&q=80">
-                <span>Racing & Flying</span>
-            </article>
+                <img th:src="@{'/images/genres/' + ${genre} + '.png'}">
 
-            <article class="category-card">
-                <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=700&q=80">
-                <span>Strategy</span>
-            </article>
+                <div class="category-card__overlay"></div>
 
-            <article class="category-card">
-                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=700&q=80">
-                <span>Role Playing</span>
-            </article>
+                <span th:text="${genre}"></span>
+
+            </a>
 
         </div>
 
@@ -55,43 +58,21 @@
 
         <div class="section__head">
             <h2 class="section__title">Recently Added</h2>
-            <a href="/games" class="section__link">Explore All</a>
+            <a th:href="@{/games(sort='recent')}">Explore All</a>
         </div>
 
         <div class="card-grid card-grid--6">
+            <a th:each="game : ${recentGames}"
+               th:href="@{/games/{id}(id=${game.id})}"
+               class="game-card">
 
-            <article class="game-card">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80">
+                <img th:src="${game.imageUrl}" alt="">
+
                 <div class="game-card__body">
-                    <h3>Turbo Rush</h3>
-                    <p>$100</p>
+                    <h3 th:text="${game.title}"></h3>
+                    <p th:text="${game.price != null ? '$' + game.price : 'Free'}"></p>
                 </div>
-            </article>
-
-            <article class="game-card">
-                <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&q=80">
-                <div class="game-card__body">
-                    <h3>Shadow Manor</h3>
-                    <p>Free</p>
-                </div>
-            </article>
-
-            <article class="game-card">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80">
-                <div class="game-card__body">
-                    <h3>Dark Realm</h3>
-                    <p>$109</p>
-                </div>
-            </article>
-
-            <article class="game-card">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80">
-                <div class="game-card__body">
-                    <h3>Red Sunset</h3>
-                    <p>$76</p>
-                </div>
-            </article>
-
+            </a>
         </div>
 
     </section>

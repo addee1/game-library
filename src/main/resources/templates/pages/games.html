@@ -1,7 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="content">
+
     <section class="games-page">
 
+        <!-- TOOLBAR -->
         <div class="games-toolbar">
 
             <input
@@ -29,19 +31,35 @@
         </div>
 
 
+        <!-- GAME GRID -->
         <div class="games-grid">
 
-            <div class="game-card">
-                <img src="/images/game1.jpg">
+            <div class="game-card"
+                 th:each="game : ${games}"
+                 th:onclick="|window.location.href='/games/${game.id}'|">
+
+                <img th:src="${game.imageUrl}" alt="Game cover">
+
                 <div class="game-info">
-                    <h4>Pixel Quest</h4>
-                    <span>$29</span>
+
+                    <h4 th:text="${game.title}"></h4>
+
+                    <span th:text="${game.price != null ? '$' + game.price : 'Free'}"></span>
+
                 </div>
+
             </div>
 
         </div>
 
 
+        <!-- EMPTY STATE -->
+        <div th:if="${#lists.isEmpty(games)}" class="info-box">
+            No games found.
+        </div>
+
+
+        <!-- PAGINATION (UI only for now) -->
         <div class="pagination">
 
             <button class="page-btn">‹</button>
@@ -55,4 +73,5 @@
         </div>
 
     </section>
+
 </div>

@@ -1,19 +1,37 @@
 package com.example.gamelibrary.dtos;
 
+import jakarta.validation.constraints.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
 public class UpdateGameDTO {
-
+    @NotBlank(message = "Title is required")
     private String title;
+
+    @NotEmpty(message = "At least one genre must be selected")
     private Set<String> genres;
+
+    @NotBlank(message = "Platform is required")
     private String platform;
+
+    @NotBlank(message = "Developer is required")
     private String developer;
+
+    @NotNull(message = "Release date is required")
     private LocalDate releaseDate;
+
+    @NotNull(message = "Price is required")
+    @PositiveOrZero(message = "Price must be 0 or greater")
     private BigDecimal price;
+
+    @NotBlank(message = "Image URL is required")
     private String imageUrl;
+
+    @Size(max = 1000, message = "Description is too long")
     private String description;
+
     private boolean featured;
 
     // Getters
