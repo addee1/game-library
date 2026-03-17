@@ -40,7 +40,19 @@
 
                     <td class="table-actions">
 
-                        <button class="btn btn--ghost btn--small">
+                        <button
+                                class="btn btn--ghost btn--small openEditModal"
+                                th:attr="
+                                    data-id=${game.id},
+                                    data-title=${game.title},
+                                    data-platform=${game.platform},
+                                    data-genres=${#strings.arrayJoin(game.genres, ',')},
+                                    data-developer=${game.developer},
+                                    data-releasedate=${game.releaseDate != null ? #temporals.format(game.releaseDate, 'yyyy-MM-dd') : ''},
+                                    data-price=${game.price},
+                                    data-image=${game.imageUrl},
+                                    data-featured=${game.featured},
+                                    data-description=${game.description}">
                             Edit
                         </button>
 
@@ -75,7 +87,8 @@
                 <button class="modal__close" id="closeAddGame">✕</button>
             </div>
 
-            <form class="modal__form"
+            <form id="gameForm"
+                  class="modal__form"
                   th:action="@{/games}"
                   th:object="${createGameDTO}"
                   method="post">
@@ -106,54 +119,9 @@
 
                         <div class="genre-dropdown__menu" id="genreDropdownMenu">
 
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Action">
-                                <span>Action</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Adventure">
-                                <span>Adventure</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="FPS">
-                                <span>FPS</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="RPG">
-                                <span>RPG</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Strategy">
-                                <span>Strategy</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Racing">
-                                <span>Racing</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Simulation">
-                                <span>Simulation</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Sports">
-                                <span>Sports</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Horror">
-                                <span>Horror</span>
-                            </label>
-
-                            <label class="genre-option">
-                                <input type="checkbox" th:field="*{genres}" value="Indie">
-                                <span>Indie</span>
+                            <label class="genre-option" th:each="genre : ${genres}">
+                                <input type="checkbox" th:field="*{genres}" th:value="${genre}">
+                                <span th:text="${genre}"></span>
                             </label>
 
                         </div>
