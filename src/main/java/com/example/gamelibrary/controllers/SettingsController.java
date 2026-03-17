@@ -1,5 +1,6 @@
 package com.example.gamelibrary.controllers;
 
+import com.example.gamelibrary.configs.GenreConstants;
 import com.example.gamelibrary.dtos.CreateGameDTO;
 import com.example.gamelibrary.dtos.UpdateGameDTO;
 import com.example.gamelibrary.services.GameService;
@@ -25,6 +26,7 @@ public class SettingsController {
     public void addCommonAttributes(Model model) {
         model.addAttribute("games", gameService.getAllGames());
         model.addAttribute("createGameDTO", new CreateGameDTO());
+        model.addAttribute("genres", GenreConstants.GENRES);
     }
 
     @GetMapping("/settings")
