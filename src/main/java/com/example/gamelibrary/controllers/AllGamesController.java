@@ -4,6 +4,7 @@ import com.example.gamelibrary.services.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AllGamesController {
@@ -15,9 +16,17 @@ public class AllGamesController {
 
 
     @GetMapping("/games")
-    public String games(Model model){
+    public String games(@RequestParam(required = false) String filter,
+                        Model model){
 
-        model.addAttribute("games", gameService.getAllGames());
+        if ("featured".equals(filter)) {
+            model.addAttribute("games", gameService.getAllFeatured());
+        } else if ("recent".equals(filter)) {
+            model.addAttribute("games", gameService.getAllSortedByNewest());
+        } else {
+            model.addAttribute("games", gameService.getAllGames());
+        }
+
         model.addAttribute("content", "pages/games");
 
         return "layout/main";
