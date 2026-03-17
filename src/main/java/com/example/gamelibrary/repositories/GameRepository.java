@@ -10,7 +10,5 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     List<Game> findByFeaturedTrue();
     List<Game> findByFavoriteTrue();
-
-    // Should get the 6 latest added games
-    List<Game> findTop6ByOrderByCreatedAtDesc();
+    List<Game> findAllByOrderByCreatedAtDesc();
 }
