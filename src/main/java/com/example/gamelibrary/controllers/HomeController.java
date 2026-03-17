@@ -1,5 +1,6 @@
 package com.example.gamelibrary.controllers;
 
+import com.example.gamelibrary.configs.GenreConstants;
 import com.example.gamelibrary.models.GenreCard;
 import com.example.gamelibrary.services.GameService;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
 
-        model.addAttribute("featuredGames", gameService.getAllFeatured());
-        model.addAttribute("recentGames", gameService.getRecentlyAdded());
-
+        model.addAttribute("featuredGames", gameService.getFeaturedForHome());
+        model.addAttribute("recentGames", gameService.getRecentForHome());
+        model.addAttribute("homeGenres", GenreConstants.HOME_GENRES);
 
 
         model.addAttribute("content", "pages/home");
