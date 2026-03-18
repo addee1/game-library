@@ -8,6 +8,10 @@ import com.example.gamelibrary.mappers.GameMapper;
 import com.example.gamelibrary.repositories.GameRepository;
 import org.springframework.stereotype.Service;
 import com.example.gamelibrary.exceptions.GameNotFoundException;
+import com.example.gamelibrary.specifications.GameSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
@@ -103,5 +107,24 @@ public class GameService {
                 .toList();
     }
 
+    public Page<GameDTO> getFilteredGames(
+            String search,
+            String genre,
+            String platform,
+            Boolean featured,
+            Boolean favorite,
+            Pageable pageable
+    ) {
+
+        Specification<Game> spec = Specification
+                .where(GameSpecification.titleOrDeveloperContains(search))
+                .and(GameSpecification.hasGenre(genre))
+                .and(GameSpecification.hasPlatform(platform))
+                .and(GameSpecification.isFeatured(featured))
+                .and(GameSpecification.isFavorite(favorite));
+
+        return gameRepository.findAll(spec, pageable)
+                .map(GameMapper::toDTO);
+    }
 
 }
