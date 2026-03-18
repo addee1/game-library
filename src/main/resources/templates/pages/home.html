@@ -6,7 +6,7 @@
 
         <div class="section__head">
             <h1 class="section__title">Featured</h1>
-            <a th:href="@{/games(filter='featured')}">Explore All</a>
+            <a th:href="@{/games(featured=true)}">Explore All</a>
         </div>
 
         <div class="card-grid card-grid--6">
@@ -31,8 +31,8 @@
     <section class="section">
 
         <div class="section__head">
-            <h2 class="section__title">Browse By Categories</h2>
-            <a th:href="@{/games(genre='Action')}">Explore All</a>
+            <h2 class="section__title">Browse By Genres</h2>
+            <a th:href="@{/games}">Explore All</a>
         </div>
 
         <div class="category-grid">
@@ -58,7 +58,7 @@
 
         <div class="section__head">
             <h2 class="section__title">Recently Added</h2>
-            <a th:href="@{/games(sort='recent')}">Explore All</a>
+            <a th:href="@{/games}">Explore All</a>
         </div>
 
         <div class="card-grid card-grid--6">
