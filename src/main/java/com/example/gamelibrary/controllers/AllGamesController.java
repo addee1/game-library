@@ -72,7 +72,7 @@ public class AllGamesController {
 
         model.addAttribute("search", search);
         model.addAttribute("featured", featured);
-        model.addAttribute("genresSelected", genre);
+        model.addAttribute("genre", genre);
         model.addAttribute("priceSort", priceSort);
         model.addAttribute("genres", GenreConstants.GENRES);
         model.addAttribute("platforms", PlatformConstants.PLATFORMS);
