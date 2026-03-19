@@ -4,31 +4,78 @@
     <section class="games-page">
 
         <!-- TOOLBAR -->
-        <div class="games-toolbar">
+        <form method="get" action="/games" class="games-toolbar">
 
-            <input
-                    type="text"
-                    class="games-search"
-                    placeholder="Search games..."
-            >
+            <div style="display:flex; gap:10px; align-items:center;">
 
-            <div class="games-filters">
+                <input
+                        type="text"
+                        name="search"
+                        class="games-search"
+                        placeholder="Search games..."
+                        th:value="${search}"
+                >
 
-                <button class="filter-btn">
-                    Platform ▾
-                </button>
-
-                <button class="filter-btn">
-                    Genre ▾
-                </button>
-
-                <button class="filter-btn">
-                    Price ▾
+                <button type="submit" class="btn btn--primary">
+                    Search
                 </button>
 
             </div>
 
-        </div>
+            <div class="games-filters">
+
+                <!-- FEATURED -->
+                <div style="display:flex; align-items:center; gap:8px;">
+
+                    <span style="font-size:14px; color:var(--color-text-secondary);">
+                        Featured
+                    </span>
+
+                    <label class="switch">
+                        <input type="checkbox"
+                               name="featured"
+                               value="true"
+                               th:checked="${featured != null and featured}">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- PLATFORM -->
+                <select name="platform" class="filter-btn">
+                    <option value="">Platform</option>
+                    <option th:each="p : ${platforms}"
+                            th:value="${p}"
+                            th:text="${p}"
+                            th:selected="${p == platform}">
+                    </option>
+                </select>
+
+                <!-- GENRE -->
+                <select name="genre" class="filter-btn">
+                    <option value="">Genre</option>
+                    <option th:each="g : ${genres}"
+                            th:value="${g}"
+                            th:text="${g}"
+                            th:selected="${g == genre}">
+                    </option>
+                </select>
+
+                <!-- PRICE -->
+                <select name="priceSort" class="filter-btn">
+                    <option value="">Price</option>
+                    <option value="low" th:selected="${priceSort == 'low'}">Low → High</option>
+                    <option value="high" th:selected="${priceSort == 'high'}">High → Low</option>
+                </select>
+
+
+                <!-- SUBMIT -->
+                <a href="/games" class="btn btn--ghost">
+                    Reset Filters
+                </a>
+
+            </div>
+
+        </form>
 
 
         <!-- GAME GRID -->
@@ -59,16 +106,49 @@
         </div>
 
 
-        <!-- PAGINATION (UI only for now) -->
-        <div class="pagination">
+        <!-- PAGINATION -->
+        <div class="pagination" th:if="${totalPages > 1}">
 
-            <button class="page-btn">‹</button>
+            <!-- PREVIOUS -->
+            <a th:if="${currentPage > 0}"
+               th:href="@{/games(
+           page=${currentPage - 1},
+           search=${search},
+           genre=${genre},
+           platform=${platform},
+           priceSort=${priceSort},
+           featured=${featured}
+       )}"
+               class="page-btn">‹</a>
 
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
+            <!-- PAGE NUMBERS -->
+            <th:block th:if="${totalPages > 0}">
+                <a th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                   th:href="@{/games(
+               page=${i},
+               search=${search},
+               genre=${genre},
+               platform=${platform},
+               priceSort=${priceSort},
+               featured=${featured}
+           )}"
+                   th:text="${i + 1}"
+                   th:classappend="${i == currentPage} ? 'active'"
+                   class="page-btn">
+                </a>
+            </th:block>
 
-            <button class="page-btn">›</button>
+            <!-- NEXT -->
+            <a th:if="${currentPage < totalPages - 1}"
+               th:href="@{/games(
+           page=${currentPage + 1},
+           search=${search},
+           genre=${genre},
+           platform=${platform},
+           priceSort=${priceSort},
+           featured=${featured}
+       )}"
+               class="page-btn">›</a>
 
         </div>
 

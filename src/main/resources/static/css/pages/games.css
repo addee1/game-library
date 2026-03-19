@@ -215,3 +215,46 @@
     color:#fff;
 
 }
+
+ /* FILTER DROPDOWN (separat från modal) */
+ .filter-dropdown {
+     position: relative;
+ }
+
+ .filter-dropdown__menu {
+     display: none;
+     position: absolute;
+     top: calc(100% + 8px);
+     left: 0;
+     width: 220px;
+
+     max-height: 220px;
+     overflow-y: auto;
+
+     background: var(--color-bg-card);
+     border: 1px solid var(--color-border);
+     border-radius: var(--radius-md);
+
+     padding: 10px;
+
+     z-index: 1000;
+ }
+
+ .filter-dropdown__menu.is-open {
+     display: block;
+ }
+
+ .filter-option {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+
+     padding: 8px 6px;
+     cursor: pointer;
+
+     border-radius: var(--radius-sm);
+ }
+
+ .filter-option:hover {
+     background: var(--color-bg-hover);
+ }
