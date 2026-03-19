@@ -36,15 +36,27 @@ public class AllGamesController {
             Model model
     ) {
 
-        Sort sort = Sort.by("createdAt").descending();
+        Sort sort = Sort.by(
+                Sort.Order.desc("createdAt"),
+                Sort.Order.asc("id")
+        );
 
         if ("low".equals(priceSort)) {
-            sort = Sort.by("price").ascending();
+            sort = Sort.by(
+                    Sort.Order.asc("price"),
+                    Sort.Order.asc("id")
+            );
         } else if ("high".equals(priceSort)) {
-            sort = Sort.by("price").descending();
+            sort = Sort.by(
+                    Sort.Order.desc("price"),
+                    Sort.Order.asc("id")
+            );
         }
 
-        Pageable pageable = PageRequest.of(page, size, sort);
+        int safePage = Math.max(page, 0);
+        int safeSize = Math.min(Math.max(size, 1), 100);
+
+        Pageable pageable = PageRequest.of(safePage, safeSize, sort);
 
         Page<GameDTO> gamePage = gameService.getFilteredGames(
                 search,
@@ -56,7 +68,7 @@ public class AllGamesController {
         );
 
         model.addAttribute("games", gamePage.getContent());
-        model.addAttribute("currentPage", page);
+        model.addAttribute("currentPage", gamePage.getNumber());
         model.addAttribute("totalPages", gamePage.getTotalPages());
 
         model.addAttribute("search", search);

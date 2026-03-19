@@ -107,45 +107,47 @@
 
 
         <!-- PAGINATION -->
-        <div class="pagination">
+        <div class="pagination" th:if="${totalPages > 1}">
 
             <!-- PREVIOUS -->
             <a th:if="${currentPage > 0}"
                th:href="@{/games(
-                   page=${currentPage - 1},
-                   search=${search},
-                   genre=${genre},
-                   platform=${platform},
-                   priceSort=${priceSort},
-                   featured=${featured}
-               )}"
+           page=${currentPage - 1},
+           search=${search},
+           genre=${genre},
+           platform=${platform},
+           priceSort=${priceSort},
+           featured=${featured}
+       )}"
                class="page-btn">‹</a>
 
             <!-- PAGE NUMBERS -->
-            <a th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-               th:href="@{/games(
-                   page=${i},
-                   search=${search},
-                   genre=${genre},
-                   platform=${platform},
-                   priceSort=${priceSort},
-                   featured=${featured}
-               )}"
-               th:text="${i + 1}"
-               th:classappend="${i == currentPage} ? 'active'"
-               class="page-btn">
-            </a>
+            <th:block th:if="${totalPages > 0}">
+                <a th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                   th:href="@{/games(
+               page=${i},
+               search=${search},
+               genre=${genre},
+               platform=${platform},
+               priceSort=${priceSort},
+               featured=${featured}
+           )}"
+                   th:text="${i + 1}"
+                   th:classappend="${i == currentPage} ? 'active'"
+                   class="page-btn">
+                </a>
+            </th:block>
 
             <!-- NEXT -->
             <a th:if="${currentPage < totalPages - 1}"
                th:href="@{/games(
-                   page=${currentPage + 1},
-                   search=${search},
-                   genre=${genre},
-                   platform=${platform},
-                   priceSort=${priceSort},
-                   featured=${featured}
-               )}"
+           page=${currentPage + 1},
+           search=${search},
+           genre=${genre},
+           platform=${platform},
+           priceSort=${priceSort},
+           featured=${featured}
+       )}"
                class="page-btn">›</a>
 
         </div>

@@ -1,3 +1,4 @@
+-- DEV ONLY (H2 in-memory reset)
 DELETE FROM game_genres;
 DELETE FROM game;
 
