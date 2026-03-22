@@ -159,7 +159,21 @@ public class Game {
     }
 
     public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+        this.reviews.clear();
+
+        if (reviews != null) {
+            reviews.forEach(this::addReview);
+        }
+    }
+
+    public void addReview(Review review) {
+        reviews.add(review);
+        review.setGame(this);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+        review.setGame(null);
     }
 
 }

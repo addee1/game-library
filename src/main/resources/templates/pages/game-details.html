@@ -162,7 +162,7 @@
                  th:each="review : ${reviews}">
 
                 <div class="review-rating"
-                     th:text="${#strings.repeat('★', review.rating)} + ${#strings.repeat('☆', 5 - review.rating)}">
+                     th:text="${#strings.repeat('★', review.rating ?: 0)} + ${#strings.repeat('☆', 5 - (review.rating ?: 0))}">
                 </div>
 
                 <p class="review-text"

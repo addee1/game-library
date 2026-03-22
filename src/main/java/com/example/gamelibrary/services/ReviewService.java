@@ -31,11 +31,13 @@ public class ReviewService {
         Review review = ReviewMapper.toEntity(dto);
 
         review.setUsername(dto.getUsername().trim());
-        review.setComment(dto.getComment() != null ? dto.getComment().trim() : null);
 
-        review.setGame(game);
+        String comment = dto.getComment() != null ? dto.getComment().trim() : null;
+        review.setComment(comment == null || comment.isEmpty() ? null : comment);
 
-        reviewRepository.save(review);
+        game.addReview(review);
+
+        gameRepository.save(game);
     }
 
     public List<ReviewDTO> getReviewsForGame(Long gameId){
@@ -46,15 +48,7 @@ public class ReviewService {
     }
 
     public double getAverageRating(Long gameId){
-        List<Review> reviews = reviewRepository.findByGameIdOrderByCreatedAtDesc(gameId);
-
-        if(reviews.isEmpty()){
-            return 0.0;
-        }
-
-        return reviews.stream()
-                .mapToInt(Review::getRating)
-                .average()
-                .orElse(0.0);
+        Double avg = reviewRepository.findAverageRatingByGameId(gameId);
+        return avg != null ? avg : 0.0;
     }
 }
