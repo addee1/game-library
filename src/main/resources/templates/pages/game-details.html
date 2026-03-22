@@ -43,7 +43,6 @@
                         <span th:text="${game.platform}"></span>
                     </p>
 
-
                     <!-- GENRES -->
                     <p>
                         <strong>Genres:</strong>
@@ -51,10 +50,9 @@
                         <span class="genre-tag"
                               th:each="genre : ${game.genres}"
                               th:text="${genre}">
-                    </span>
+                        </span>
 
                     </p>
-
 
                     <!-- PRICE -->
                     <p class="game-price"
@@ -62,7 +60,6 @@
                     </p>
 
                 </div>
-
 
                 <!-- DESCRIPTION -->
                 <p class="game-description"
@@ -76,22 +73,21 @@
     </section>
 
 
-
     <section class="reviews-section">
 
         <div class="reviews-header">
 
             <h2>User Reviews</h2>
 
-            <div class="rating-average">
-                ★★★★★ 4.2 / 5
-            </div>
+            <div class="rating-average"
+                 th:if="${averageRating > 0}">
 
+                <span th:text="${#numbers.formatDecimal(averageRating,1,1)}"></span> / 5
+            </div>
         </div>
 
 
         <!-- ADD REVIEW BUTTON -->
-
         <div class="add-review-toggle">
 
             <p class="add-review-text">
@@ -103,67 +99,79 @@
             </button>
 
         </div>
-
+        <div class="form-success"
+             th:if="${param.success}">
+            Review submitted successfully!
+        </div>
 
         <!-- REVIEW FORM -->
+        <form class="review-form-container"
+              id="reviewForm"
+              th:action="@{/games/{id}/reviews(id=${game.id})}"
+              method="post"
+              th:object="${createReviewDTO}"
+              th:classappend="${#fields.hasErrors()} ? 'active'">
 
-        <div class="review-form-container" id="reviewForm">
 
             <div class="review-rating-select">
 
-                <input type="text" placeholder="Your name">
+                <!-- USERNAME -->
+                <input type="text"
+                       placeholder="Your name"
+                       th:field="*{username}">
 
+
+
+                <!-- STARS -->
                 <div class="star-rating" id="starRating">
-
                     <span data-value="1">☆</span>
                     <span data-value="2">☆</span>
                     <span data-value="3">☆</span>
                     <span data-value="4">☆</span>
                     <span data-value="5">☆</span>
-
                 </div>
 
             </div>
 
-            <textarea placeholder="Comment (optional)"></textarea>
+            <!-- HIDDEN RATING -->
+            <input type="hidden" th:field="*{rating}" id="ratingInput">
 
-            <button class="btn btn--primary">
+
+            <!-- COMMENT (OPTIONAL) -->
+            <textarea placeholder="Comment (optional)"
+                      th:field="*{comment}"></textarea>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="btn btn--primary">
                 Submit Review
             </button>
 
-        </div>
-
-
-        <!-- REVIEW LIST (still placeholder for now) -->
-
-        <div class="reviews-list">
-
-            <div class="review-card">
-
-                <div class="review-rating">★★★★★</div>
-
-                <p class="review-text">
-                    "Amazing world and storytelling!"
-                </p>
-
-                <div class="review-meta">
-                    <span>PlayerOne</span>
-                    <span>12 Mar 2026</span>
-                </div>
+            <div class="form-error"
+                 th:if="${#fields.hasErrors()}">
+                Please fill in username and rating.
 
             </div>
 
-            <div class="review-card">
+        </form>
 
-                <div class="review-rating">★★★★☆</div>
 
-                <p class="review-text">
-                    "Great game but still some bugs."
+        <!-- REVIEW LIST -->
+        <div class="reviews-list">
+
+            <div class="review-card"
+                 th:each="review : ${reviews}">
+
+                <div class="review-rating"
+                     th:text="${#strings.repeat('★', review.rating ?: 0)} + ${#strings.repeat('☆', 5 - (review.rating ?: 0))}">
+                </div>
+
+                <p class="review-text"
+                   th:text="${review.comment}">
                 </p>
 
                 <div class="review-meta">
-                    <span>GamerGuy</span>
-                    <span>10 Mar 2026</span>
+                    <span th:text="${review.username}"></span>
+                    <span th:text="${#temporals.format(review.createdAt,'dd MMM yyyy')}"></span>
                 </div>
 
             </div>
