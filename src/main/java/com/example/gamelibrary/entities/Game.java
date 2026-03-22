@@ -1,11 +1,13 @@
 package com.example.gamelibrary.entities;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,12 +15,27 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String platform;
+
+    @NotBlank
     private String developer;
+
+    @NotNull
     private LocalDate releaseDate;
+
+    @NotNull
+    @PositiveOrZero
     private BigDecimal price;
+
+    @NotBlank
     private String imageUrl;
+
+    @Size(max = 1000)
     @Lob
     private String description;
     private boolean featured;
@@ -29,6 +46,9 @@ public class Game {
     private Set<String> genres = new HashSet<>();
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public Game() {
     }
@@ -130,6 +150,16 @@ public class Game {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+    }
+
+
+    // reviews
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
 }
