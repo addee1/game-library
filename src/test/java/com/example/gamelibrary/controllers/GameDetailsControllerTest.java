@@ -64,7 +64,7 @@ public class GameDetailsControllerTest {
         when(reviewService.getAverageRating(1L)).thenReturn(0.0);
 
         mockMvc.perform(post("/games/1/reviews")
-                        .param("username", "") // invalid (triggar validation)
+                        .param("username", "")
                         .param("rating", "5")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
