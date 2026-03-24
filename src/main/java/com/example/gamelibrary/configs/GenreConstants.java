@@ -8,7 +8,7 @@ public class GenreConstants {
     public static final List<String> GENRES = List.of(
             "Action", "Adventure", "RPG",
             "Strategy", "Racing", "Simulation",
-            "Sports", "Horror", "Indie"
+            "Sport", "Horror", "Indie", "Shooter", "Tactical", "Arcade", "Board Game", "Puzzle"
     );
 
     // for home page
