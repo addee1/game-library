@@ -31,7 +31,7 @@ public class AllGamesController {
             @RequestParam(required = false) String priceSort,
             @RequestParam(required = false) Boolean featured,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "12") int size,
+            @RequestParam(defaultValue = "14") int size,
             Model model
     ) {
 
