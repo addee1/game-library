@@ -154,5 +154,5 @@ INSERT INTO game_genres (game_id, genre) VALUES
 (20, 'Indie'),
 (21, 'RPG'),
 (21, 'Strategy'),
-(21, 'RPG'),
-(21, 'Adventure'); --Dark Souls III
+(22, 'RPG'),
+(22, 'Adventure');
