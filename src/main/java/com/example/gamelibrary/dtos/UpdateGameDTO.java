@@ -29,7 +29,7 @@ public class UpdateGameDTO {
     @NotBlank(message = "Image URL is required")
     private String imageUrl;
 
-    @Size(max = 1000, message = "Description is too long")
+    @Size(max = 5000, message = "Description is too long")
     private String description;
 
     private boolean featured;
