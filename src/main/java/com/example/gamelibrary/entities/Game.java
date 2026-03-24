@@ -35,7 +35,7 @@ public class Game {
     @NotBlank
     private String imageUrl;
 
-    @Size(max = 1000)
+    @Size(max = 5000)
     @Lob
     private String description;
     private boolean featured;
